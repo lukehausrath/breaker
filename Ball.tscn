@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://Scripts/GameScene/BallRigidBody.gd" type="Script" id=1]
+[ext_resource path="res://assets/PNG/marbles/Orange.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/GameScene/BallColor.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[sub_resource type="CanvasItemShader" id=2]
+
+_code = { "fragment":"\nuniform float radius=2.0;\nuniform float amount=0.6;\nfloat r = radius;\nvec2 ps = TEXTURE_PIXEL_SIZE;\n\nvec4 col = tex(TEXTURE,UV);\n\nvec4 glow = col;\nglow += tex(TEXTURE,UV+vec2(-r,-r)*ps);\nglow += tex(TEXTURE,UV+vec2(-r,0)*ps);\nglow += tex(TEXTURE,UV+vec2(-r,r)*ps);\nglow += tex(TEXTURE,UV+vec2(0,-r)*ps);\nglow += tex(TEXTURE,UV+vec2(0,r)*ps);\nglow += tex(TEXTURE,UV+vec2(r,-r)*ps);\nglow += tex(TEXTURE,UV+vec2(r,0)*ps);\nglow += tex(TEXTURE,UV+vec2(r,r)*ps);\nr*=2.0;\nglow += tex(TEXTURE,UV+vec2(-r,-r)*ps);\nglow += tex(TEXTURE,UV+vec2(-r,0)*ps);\nglow += tex(TEXTURE,UV+vec2(-r,r)*ps);\nglow += tex(TEXTURE,UV+vec2(0,-r)*ps);\nglow += tex(TEXTURE,UV+vec2(0,r)*ps);\nglow += tex(TEXTURE,UV+vec2(r,-r)*ps);\nglow += tex(TEXTURE,UV+vec2(r,0)*ps);\nglow += tex(TEXTURE,UV+vec2(r,r)*ps);\n\nglow/=17.0;\nglow*=amount;\ncol.rgb*=col.a;\nCOLOR=glow+col; ", "fragment_ofs":0, "light":"", "light_ofs":0, "vertex":"", "vertex_ofs":0 }
+
+[sub_resource type="CanvasItemMaterial" id=3]
+
+shader/shader = SubResource( 2 )
+shader/shading_mode = 0
+shader_param/radius = 2.0
+shader_param/amount = 0.0
+
+[node name="BallKinematicBody" type="KinematicBody2D"]
+
+transform/pos = Vector2( 577, 2079 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 3.1, 0, 0, 3.1, 0.92743, -0.349597 )
+shapes/0/trigger = false
+collision/layers = 2
+collision/mask = 1
+collision/margin = 0.008
+script/script = ExtResource( 1 )
+
+[node name="BallSprite" type="Sprite" parent="."]
+
+material/material = SubResource( 3 )
+texture = ExtResource( 2 )
+offset = Vector2( 1, 0 )
+script/script = ExtResource( 3 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="BallCollisionShape" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0.92743, -0.349597 )
+transform/scale = Vector2( 3.1, 3.1 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+__meta__ = { "_edit_lock_":true }
+
+

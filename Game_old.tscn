@@ -1,0 +1,154 @@
+[gd_scene load_steps=10 format=1]
+
+[ext_resource path="res://Scripts/GameScene/Game.gd" type="Script" id=1]
+[ext_resource path="res://assets/menu-background.jpg" type="Texture" id=2]
+[ext_resource path="res://Scripts/GameScene/PaddleKinematicBody.gd" type="Script" id=3]
+[ext_resource path="res://assets/BlueBrick.tex" type="Texture" id=4]
+[ext_resource path="res://BrickTileSet.res" type="TileSet" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 7.63466, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 4, 1080 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 4, 1080 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 1920, 4 )
+
+[node name="SceneRoot" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+script/script = ExtResource( 1 )
+
+[node name="TextureFrame" type="TextureFrame" parent="Node2D"]
+
+visibility/opacity = 0.3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 3840.0
+margin/bottom = 2160.0
+texture = ExtResource( 2 )
+stretch_mode = 5
+
+[node name="PaddleKinematicBody" type="KinematicBody2D" parent="Node2D"]
+
+transform/pos = Vector2( 607, 2144 )
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 3 )
+
+[node name="Paddle" type="Sprite" parent="Node2D/PaddleKinematicBody"]
+
+transform/pos = Vector2( -33, -8.5 )
+transform/scale = Vector2( 8.1875, 1.53126 )
+texture = ExtResource( 4 )
+
+[node name="PaddleCollisionShape" type="CollisionShape2D" parent="Node2D/PaddleKinematicBody/Paddle"]
+
+transform/pos = Vector2( 0.122139, 0 )
+transform/scale = Vector2( 4.18048, 1.58241 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="RightWall" type="StaticBody2D" parent="Node2D"]
+
+transform/pos = Vector2( 3840, 1080 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="RightWallCollisionShape" type="CollisionShape2D" parent="Node2D/RightWall"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="LeftWall" type="StaticBody2D" parent="Node2D"]
+
+transform/pos = Vector2( 0, 1080 )
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="LeftWallCollisionShape" type="CollisionShape2D" parent="Node2D/LeftWall"]
+
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
+[node name="TopWall" type="StaticBody2D" parent="Node2D"]
+
+transform/pos = Vector2( 1920, 0 )
+input/pickable = false
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="TopWallCollisionShape" type="CollisionShape2D" parent="Node2D/TopWall"]
+
+shape = SubResource( 4 )
+trigger = false
+_update_shape_index = 0
+
+[node name="TileMap" type="TileMap" parent="Node2D"]
+
+visibility/visible = false
+transform/scale = Vector2( 2, 2 )
+mode = 0
+tile_set = ExtResource( 5 )
+cell/size = Vector2( 64, 32 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 1.0
+collision/layers = 0
+collision/mask = 0
+occluder/light_mask = 1
+tile_data = IntArray( 524295, 2, 524296, 2, 524297, 2, 524298, 2, 589831, 3, 589833, 3, 589838, 0, 589839, 0, 589840, 0, 589841, 0, 589842, 0, 589843, 0, 589844, 0, 589845, 0, 589846, 0, 655367, 0, 655368, 0, 655369, 0, 655370, 0, 655371, 0, 655372, 0, 655373, 0, 655374, 0, 655382, 0, 983040, 0, 983041, 0, 983042, 0, 983043, 0, 983044, 0, 983045, 0, 983046, 0, 983047, 0, 983048, 0, 983049, 0, 983050, 0, 983051, 0, 983052, 0, 983053, 0, 1441811, 0, 1441812, 0, 1441813, 0, 1441814, 0, 1441815, 0, 1441816, 0, 1441817, 0, 1441818, 0, 1441819, 0, 1507332, 0, 1507333, 0, 1507334, 0, 1507335, 0, 1507336, 0, 1507337, 0, 1507338, 0, 1507339, 0, 1507340, 0, 1507341, 0, 1507342, 0, 1507343, 0, 1507344, 0, 1507345, 0, 1507346, 0, 1507347, 0, 1572864, 0, 1572865, 0, 1572866, 0, 1572867, 0, 1572868, 0, 1966101, 0 )
+
+

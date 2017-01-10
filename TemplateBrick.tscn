@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Scripts/GameScene/BrickTemplate.gd" type="Script" id=1]
+[ext_resource path="res://assets/PNG/bricks/BlueBrick.png" type="Texture" id=2]
+
+[node name="Brick" type="StaticBody2D"]
+
+visibility/visible = false
+input/pickable = false
+collision/layers = 3
+collision/mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 0.0
+bounce = 0.0
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+visibility/behind_parent = true
+transform/pos = Vector2( 64, 32 )
+transform/scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Scripts/GameScene/Drop.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 20, 20 )
+
+[node name="DropKinematicBody" type="KinematicBody2D"]
+
+transform/pos = Vector2( 1837.8, 934.005 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 2, 0, 0, 2, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 32
+collision/mask = 64
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 2, 2 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="DropCollisionShape" type="CollisionShape2D" parent="."]
+
+transform/scale = Vector2( 2, 2 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+__meta__ = { "_edit_lock_":true }
+
+

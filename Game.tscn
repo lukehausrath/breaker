@@ -1,0 +1,167 @@
+[gd_scene load_steps=15 format=1]
+
+[ext_resource path="res://Scripts/GameScene/Game.gd" type="Script" id=1]
+[ext_resource path="res://assets/menu-background.jpg" type="Texture" id=2]
+[ext_resource path="res://Scripts/GameScene/PaddleKinematicBody.gd" type="Script" id=3]
+[ext_resource path="res://assets/BlueBrick.tex" type="Texture" id=4]
+[ext_resource path="res://Scripts/GameScene/Wall.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/GameScene/Bricks.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/GameScene/BallNode.gd" type="Script" id=7]
+[ext_resource path="res://DropNode.gd" type="Script" id=8]
+[ext_resource path="res://Fonts/MyFont.fnt" type="BitmapFont" id=9]
+[ext_resource path="res://Scripts/GameScene/fpsLabel.tres.gd" type="Script" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 7.63466, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 20, 1080 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 20, 1080 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 1920, 20 )
+
+[node name="Node2D" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="TextureFrame" type="TextureFrame" parent="."]
+
+visibility/opacity = 0.3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 3840.0
+margin/bottom = 2160.0
+texture = ExtResource( 2 )
+stretch_mode = 5
+
+[node name="PaddleKinematicBody" type="KinematicBody2D" parent="."]
+
+transform/pos = Vector2( 607, 2144 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 67
+collision/mask = 35
+collision/margin = 0.0
+script/script = ExtResource( 3 )
+
+[node name="Paddle" type="Sprite" parent="PaddleKinematicBody"]
+
+texture = ExtResource( 4 )
+
+[node name="PaddleCollisionShape" type="CollisionShape2D" parent="PaddleKinematicBody"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+
+transform/pos = Vector2( 3860, 1080 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 3
+collision/mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 0.0
+bounce = 1.0
+script/script = ExtResource( 5 )
+
+[node name="RightWallCollisionShape" type="CollisionShape2D" parent="RightWall"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+transform/pos = Vector2( 0, 1080 )
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -20, 0 )
+shapes/0/trigger = false
+collision/layers = 3
+collision/mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 0.0
+bounce = 1.0
+script/script = ExtResource( 5 )
+
+[node name="LeftWallCollisionShape" type="CollisionShape2D" parent="LeftWall"]
+
+transform/pos = Vector2( -20, 0 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+
+transform/pos = Vector2( 1920, 0 )
+input/pickable = false
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -20 )
+shapes/0/trigger = false
+collision/layers = 3
+collision/mask = 3
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 0.0
+bounce = 1.0
+script/script = ExtResource( 5 )
+
+[node name="TopWallCollisionShape" type="CollisionShape2D" parent="TopWall"]
+
+transform/pos = Vector2( 0, -20 )
+shape = SubResource( 4 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Bricks" type="Node2D" parent="."]
+
+script/script = ExtResource( 6 )
+
+[node name="BallNode" type="Node2D" parent="."]
+
+script/script = ExtResource( 7 )
+
+[node name="DropNode" type="Node2D" parent="."]
+
+script/script = ExtResource( 8 )
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 465.0
+margin/bottom = 124.0
+custom_fonts/font = ExtResource( 9 )
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = ExtResource( 10 )
+
+
