@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/PNG/marbles/Red.png" type="Texture" id=9]
 [ext_resource path="res://assets/PNG/marbles/Teal.png" type="Texture" id=10]
 [ext_resource path="res://assets/PNG/marbles/Yellow.png" type="Texture" id=11]
-[ext_resource path="res://Fonts/MyFont.fnt" type="BitmapFont" id=12]
+[ext_resource path="res://Fonts/TitleFont.fnt" type="BitmapFont" id=12]
 
 [node name="TitleSceneRoot" type="Node"]
 
@@ -220,15 +220,31 @@ __meta__ = { "_edit_lock_":true }
 
 [node name="TitleText" type="Label" parent="."]
 
-rect/scale = Vector2( 3, 3 )
+rect/scale = Vector2( 2.5, 2.5 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 804.0
-margin/top = 178.0
-margin/right = 1609.0
-margin/bottom = 329.0
+margin/left = 1.0
+margin/top = 463.0
+margin/right = 1535.0
+margin/bottom = 614.0
+custom_fonts/font = ExtResource( 12 )
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="SubText" type="Label" parent="."]
+
+rect/scale = Vector2( 1.25, 1.25 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 1.0
+margin/top = 730.0
+margin/right = 3070.0
+margin/bottom = 816.0
 custom_fonts/font = ExtResource( 12 )
 percent_visible = 1.0
 lines_skipped = 0

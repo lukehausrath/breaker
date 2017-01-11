@@ -7,7 +7,13 @@ func _ready():
 	var mouse = load("res://assets/PNG/white-arrow.png")
 	Input.set_custom_mouse_cursor(mouse)
 	
-	get_node("TitleText").set_text("Breaker")
+	var titleText = get_node("TitleText")
+	titleText.set_align(HALIGN_CENTER)
+	titleText.set_text("Breaker")
+	
+	var subText = get_node("SubText")
+	subText.set_align(HALIGN_CENTER)
+	subText.set_text("Choose your color to play")
 
 func startGameScene():
 	get_node("/root/global").setScene("res://Game.tscn")
