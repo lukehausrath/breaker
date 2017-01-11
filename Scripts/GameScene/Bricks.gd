@@ -27,6 +27,7 @@ var iCurrentLevel = 0
 var levelArray = []
 var brickArray = []
 const brickArraySize = 30
+var brickCount = 0
 
 func _ready():
 	#set_process(true)
@@ -36,12 +37,18 @@ func _ready():
 	allLevels.parse_json(file.get_as_text())
 	levelArray = allLevels.values()
 	
+	get_parent().connect("NewLevel", self, "newLevel")
+	
 	scoreNode = get_node("/root/Node2D/Score")
 	assert(scoreNode != null)
 	
 	loadNextLevel()
 
 func loadNextLevel():
+	aCurrentLevel = []
+	brickArray = []
+	brickCount = 0
+	
 	var brickScene = load("res://TemplateBrick.tscn")
 	
 	aCurrentLevel = levelArray[iCurrentLevel]
@@ -57,6 +64,7 @@ func loadNextLevel():
 			if (aCurrentLevel[x][y]):
 				s.setColor(aCurrentLevel[x][y])
 				s.show()
+				brickCount += 1
 	addCollision()
 
 func updateAdjacentBricks(brick):
@@ -89,7 +97,14 @@ func updateAdjacentBricks(brick):
 	if (brickArray[row][column] != null):
 		brick.removeCollision()
 		brick.hide()
+		brickCount -= 1
 	brickArray[row][column] = null
+	
+	checkLevelCompletion()
+
+func checkLevelCompletion():
+	if (brickCount <= 0):
+		get_parent().nextLevel()
 
 func addCollision():
 	for row in range(brickArraySize):
@@ -119,3 +134,9 @@ func drop(pos):
 	var s = dropScene.instance()
 	s.set_pos(pos)
 	get_parent().get_node("DropNode").add_child(s)
+
+func newLevel():
+	for brick in get_children():
+		brick.removeCollision()
+		brick.hide()
+	loadNextLevel()

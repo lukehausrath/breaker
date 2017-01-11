@@ -18,7 +18,6 @@ func _ready():
 	dropNode.connect("Activate_Fireball", self, "fireball")
 	
 	set_meta("Type", global.TYPE.BALL)
-	fireball()
 
 func _fixed_process(delta):
 	if (is_colliding()):
@@ -131,3 +130,7 @@ func increaseBallSpeed():
 func fireball():
 	onFire = true
 	increaseBallSpeed()
+
+func stop():
+	set_move_vector(Vector2(0,0))
+	launched = false

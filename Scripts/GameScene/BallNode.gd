@@ -21,6 +21,8 @@ func _ready():
 	scoreNode = get_node("/root/Node2D/Score")
 	assert(scoreNode != null)
 	
+	get_parent().connect("NewLevel", self, "newLevel")
+	
 	var paddle = get_node("/root/Node2D/PaddleKinematicBody")
 	paddle.connect("Launched", self, "set_launched")
 
@@ -38,3 +40,12 @@ func set_launched():
 
 func scoreIncrease():
 	scoreNode.emit_signal("increase_score", 5)
+
+func stop():
+	for child in get_children():
+		child.stop()
+
+func newLevel():
+	launched = false
+	for child in get_children():
+		child.queue_free()

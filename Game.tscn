@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://Scripts/GameScene/Game.gd" type="Script" id=1]
 [ext_resource path="res://assets/menu-background.jpg" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://DropNode.gd" type="Script" id=8]
 [ext_resource path="res://Fonts/MyFont.fnt" type="BitmapFont" id=9]
 [ext_resource path="res://Scripts/GameScene/fpsLabel.tres.gd" type="Script" id=10]
+[ext_resource path="res://Fonts/TitleFont.fnt" type="BitmapFont" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -164,5 +165,47 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 script/script = ExtResource( 10 )
+
+[node name="LevelText" type="Label" parent="."]
+
+rect/scale = Vector2( 1.5, 1.5 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 643.0
+margin/right = 2558.0
+margin/bottom = 944.0
+custom_fonts/font = ExtResource( 11 )
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="LevelSubText" type="Label" parent="LevelText"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 394.0
+margin/right = 2558.0
+margin/bottom = 480.0
+custom_fonts/font = ExtResource( 11 )
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="NextLevelTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
 
 

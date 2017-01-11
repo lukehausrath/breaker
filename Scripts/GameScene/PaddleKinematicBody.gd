@@ -23,6 +23,7 @@ func _ready():
 	
 	var dropNode = get_node("/root/Node2D/DropNode")
 	dropNode.connect("Increase_Paddle_Size", self, "increasePaddleSize")
+	get_parent().connect("NewLevel", self, "newLevel")
 	
 	get_node("Paddle").edit_set_rect(Rect2(0,0,paddleWidth,paddleHeight))
 	get_node("PaddleCollisionShape").get_shape().set_extents(Vector2(paddleWidth / 2, paddleHeight / 2))
@@ -86,3 +87,10 @@ func increasePaddleSize():
 	if (paddleWidth <= 1000):
 		paddleWidth += 100
 		set_scale(get_scale() * 1.1)
+
+func newLevel():
+	set_scale(Vector2(1,1))
+	
+	childBall = ballScn.instance()
+	add_child(childBall)
+	childBall.set_pos(Vector2(paddleWidth / 2, -40))
