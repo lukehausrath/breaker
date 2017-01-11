@@ -1,12 +1,13 @@
 
 extends KinematicBody2D
+var scoreNode
 
 var ballScn = preload("res://Ball.tscn")
 var childBall = null
 var rigidBall = null
 var paddleWidth = 500
 const paddleHeight = 50
-var paddleSpeed = Vector2(1500,0)
+var paddleSpeed = Vector2(2000,0)
 var lastMousePos = Vector2(0,0)
 const paddleY = 2160 - paddleHeight
 
@@ -34,6 +35,9 @@ func _ready():
 	childBall.set_pos(Vector2(paddleWidth / 2, -40))
 	
 	set_meta("Type", global.TYPE.PADDLE)
+	
+	scoreNode = get_node("/root/Node2D/Score")
+	assert(scoreNode != null)
 
 func _fixed_process(delta):
 	movePaddle(delta)
@@ -44,8 +48,10 @@ func _fixed_process(delta):
 func collide():
 	var collider = get_collider()
 	if (collider.get_meta("Type") == global.TYPE.DROP):
+		scoreNode.emit_signal("increase_score", 15)
 		collider.activate()
 	if (collider.get_meta("Type") == global.TYPE.BALL):
+		scoreNode.emit_signal("increase_score", 5)
 		collider.collide(get_collision_pos(), true)
 
 func movePaddle(delta):

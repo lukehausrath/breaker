@@ -79,6 +79,8 @@ func notifyBricks():
 	var collider = get_collider()
 	if (collider.get_meta("Type") == global.TYPE.BRICK):
 		collider.get_parent().updateAdjacentBricks(collider)
+	elif(collider.get_meta("Type") == global.TYPE.PADDLE):
+		get_parent().scoreIncrease()
 
 func moveBall(moveVector, delta):
 	# prevent horizontal movement

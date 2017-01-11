@@ -20,6 +20,8 @@ var TEAL_BRICK = load("res://assets/PNG/bricks/TealBrick.png")
 var YELLOW_BRICK = load("res://assets/PNG/bricks/YellowBrick.png")
 var BLACK_BRICK = load("res://assets/PNG/bricks/BlackBrick.png")
 
+var scoreNode
+
 var aCurrentLevel = []
 var iCurrentLevel = 0
 var levelArray = []
@@ -33,6 +35,10 @@ func _ready():
 	var allLevels = Dictionary()
 	allLevels.parse_json(file.get_as_text())
 	levelArray = allLevels.values()
+	
+	scoreNode = get_node("/root/Node2D/Score")
+	assert(scoreNode != null)
+	
 	loadNextLevel()
 
 func loadNextLevel():
@@ -54,6 +60,8 @@ func loadNextLevel():
 	addCollision()
 
 func updateAdjacentBricks(brick):
+	scoreNode.emit_signal("increase_score", 20)
+	
 	var brickPos = brick.get_pos()
 	var size = brick.get_child(0).get_texture().get_size()
 	checkForDrop(Vector2(brickPos.x + size.x, brickPos.y + size.y))
