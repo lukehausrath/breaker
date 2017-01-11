@@ -18,6 +18,7 @@ func _ready():
 	dropNode.connect("Activate_Fireball", self, "fireball")
 	
 	set_meta("Type", global.TYPE.BALL)
+	fireball()
 
 func _fixed_process(delta):
 	if (is_colliding()):
@@ -28,7 +29,10 @@ func _fixed_process(delta):
 			var type = get_collider().get_meta("Type")
 			if (type == global.TYPE.WALL || type == global.TYPE.PADDLE):
 				collide(get_collision_pos(), false)
-			notifyBricks()
+			elif (type == global.TYPE.BRICK):
+				if (get_collider().is_invulnerable()):
+					collide(get_collision_pos(), false)
+				notifyBricks()
 	
 	if (launched):
 		moveBall(moveVector, delta)
@@ -78,7 +82,9 @@ func collide(collisionPos, isPaddle):
 func notifyBricks():
 	var collider = get_collider()
 	if (collider.get_meta("Type") == global.TYPE.BRICK):
-		collider.get_parent().updateAdjacentBricks(collider)
+		collider.hit()
+		if (!collider.alive()):
+			collider.get_parent().updateAdjacentBricks(collider)
 	elif(collider.get_meta("Type") == global.TYPE.PADDLE):
 		get_parent().scoreIncrease()
 

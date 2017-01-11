@@ -6,7 +6,8 @@ var right
 var left
 var bottom
 
-var hit = false
+var health = 1
+var invulnerable = false
 
 func _ready():
 	top = SegmentShape2D.new()
@@ -58,22 +59,42 @@ func removeCollision():
 #YELLOW = 8
 #BLACK = 9
 
+func hit():
+	health -= 1
+
+func alive():
+	if (health <= 0 && !invulnerable):
+		return false
+	return true
+
+func is_invulnerable():
+	return invulnerable
+
 func setColor(iColor):
 	if (iColor == global.BRICK_COLOR.BLUE):
 		get_child(0).set_texture(get_parent().BLUE_BRICK)
+		health = 1
 	if (iColor == global.BRICK_COLOR.GREEN):
 		get_child(0).set_texture(get_parent().GREEN_BRICK)
+		health = 1
 	if (iColor == global.BRICK_COLOR.BROWN):
 		get_child(0).set_texture(get_parent().BROWN_BRICK)
+		health = 2
 	if (iColor == global.BRICK_COLOR.ORANGE):
 		get_child(0).set_texture(get_parent().ORANGE_BRICK)
+		health = 2
 	if (iColor == global.BRICK_COLOR.PINK):
 		get_child(0).set_texture(get_parent().PINK_BRICK)
+		health = 3
 	if (iColor == global.BRICK_COLOR.RED):
 		get_child(0).set_texture(get_parent().RED_BRICK)
+		health = 3
 	if (iColor == global.BRICK_COLOR.TEAL):
 		get_child(0).set_texture(get_parent().TEAL_BRICK)
+		health = 3
 	if (iColor == global.BRICK_COLOR.YELLOW):
 		get_child(0).set_texture(get_parent().YELLOW_BRICK)
+		health = 3
 	if (iColor == global.BRICK_COLOR.BLACK):
 		get_child(0).set_texture(get_parent().BLACK_BRICK)
+		invulnerable = true

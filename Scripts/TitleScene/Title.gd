@@ -6,6 +6,8 @@ var gameScene = null
 func _ready():
 	var mouse = load("res://assets/PNG/white-arrow.png")
 	Input.set_custom_mouse_cursor(mouse)
+	
+	get_node("TitleText").set_text("Breaker")
 
 func startGameScene():
 	get_node("/root/global").setScene("res://Game.tscn")
