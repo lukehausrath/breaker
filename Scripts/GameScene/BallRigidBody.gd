@@ -20,7 +20,7 @@ func _ready():
 	set_meta("Type", global.TYPE.BALL)
 
 func _fixed_process(delta):
-	if (is_colliding()):
+	if (is_colliding() && launched):
 		if (!onFire):
 			collide(get_collision_pos(), false)
 			notifyBricks()

@@ -64,7 +64,8 @@ func loadNextLevel():
 			if (aCurrentLevel[x][y]):
 				s.setColor(aCurrentLevel[x][y])
 				s.show()
-				brickCount += 1
+				if (!s.is_invulnerable()):
+					brickCount += 1
 	addCollision()
 
 func updateAdjacentBricks(brick):
@@ -125,7 +126,7 @@ func addCollision():
 						brick.addCollision(global.RIGHT)
 
 func checkForDrop(pos):
-	var r = randi() % 5
+	var r = randi() % 4
 	if (r == 1):
 		drop(pos)
 

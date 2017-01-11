@@ -37,6 +37,7 @@ func nextLevel():
 	get_node("LevelText").show()
 	get_node("NextLevelTimer").start()
 	get_node("BallNode").stop()
+	get_node("DropNode").stop()
 
 func timeout():
 	get_node("LevelText").set_text(str("Level ", currentLevel))

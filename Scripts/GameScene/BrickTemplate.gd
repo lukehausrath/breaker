@@ -61,6 +61,11 @@ func removeCollision():
 
 func hit():
 	health -= 1
+	var sprite = get_node("Sprite")
+	var oldMod = sprite.get_modulate()
+	
+	if (!invulnerable):
+		sprite.set_modulate(Color(oldMod.r, oldMod.g, oldMod.b, oldMod.a * .75))
 
 func alive():
 	if (health <= 0 && !invulnerable):
