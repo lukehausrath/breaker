@@ -148,16 +148,17 @@ script/script = ExtResource( 7 )
 
 script/script = ExtResource( 8 )
 
-[node name="Label" type="Label" parent="."]
+[node name="Score" type="Label" parent="."]
 
+rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 465.0
-margin/bottom = 124.0
+margin/right = 371.0
+margin/bottom = 100.0
 custom_fonts/font = ExtResource( 9 )
 percent_visible = 1.0
 lines_skipped = 0
